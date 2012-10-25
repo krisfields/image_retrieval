@@ -9,11 +9,17 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from time import sleep
 
-def _create_or_update_vendor(domain_name):
+def _create_or_update_vendor(domain_name, handle_existing_vendors):
 	#check and get vendor with domain name if it exists.  create one otherwise.
-	vendor, created = Vendor.objects.get_or_create(domain_name=domain_name)
-	if vendor.profile_image_url:
+	if handle_existing_vendors == 1:
+		try:
+			vendor = Vendor.objects.get(domain_name=domain_name)
 			return vendor.profile_image_url
+		except Vendor.DoesNotExist:
+			pass
+	vendor, created = Vendor.objects.get_or_create(domain_name=domain_name)
+	if handle_existing_vendors == 3 and vendor.profile_image_url:
+		return vendor.profile_image_url
 	if not vendor.facebook_id:
 		#if vendor object doesn't have a facebook_id, then call method that uses facebook search api to search for an item by domain_name and returns the facebook id number.  store number
 		vendor.facebook_id = _get_facebook_id(vendor.domain_name)	
@@ -90,10 +96,11 @@ def grab_images(request):
 		form = UploadFileForm(request.POST, request.FILES)
 		if form.is_valid():
 			file = form.cleaned_data['file']
+			handle_existing_vendors = int(form.cleaned_data['handle_existing_vendors'])
 			reader = csv.reader(file)
 			for row in reader:
 				domain_name = row[4].strip()
-				_create_or_update_vendor(domain_name)
+				_create_or_update_vendor(domain_name, handle_existing_vendors)
 			return HttpResponseRedirect('/admin/image_grab/vendor/')
 	else:
 		form = UploadFileForm()
