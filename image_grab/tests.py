@@ -23,8 +23,8 @@ class ImageGrabTests(TestCase):
 		self.assertEqual(fb_variables['profile_image_url'], 'http://profile.ak.fbcdn.net/hprofile-ak-ash4/373147_25597601080_882238666_q.jpg')
 		self.assertEqual(fb_variables['facebook_url'], 'http://www.facebook.com/becomecom')
 	def test_create_or_update_vendor(self):
-		self.assertEqual(createOrUpdateVendor('BECOME.COM'), 'http://profile.ak.fbcdn.net/hprofile-ak-ash4/373147_25597601080_882238666_q.jpg')
+		self.assertEqual(createOrUpdateVendor('BECOME.COM', 2), 'http://profile.ak.fbcdn.net/hprofile-ak-ash4/373147_25597601080_882238666_q.jpg')
 	def test_display_image_function(self):
-		vendor_profile_url = createOrUpdateVendor('AMAZON.COM')
+		vendor_profile_url = createOrUpdateVendor('AMAZON.COM', 2)
 		vendor = Vendor.objects.all()[0]
 		self.assertNotEqual(displayImage(vendor.pk), None)
