@@ -4,13 +4,13 @@
 
 <div id="content-main"?
 	<h2>Select a CSV file to upload.</h2>
-	<p>When the program is done running, you'll be taken to the admin area to verify that everything went smoothly.  In the event that things didn't go smoothly, don't panic!  It just means you screwed up.</p>
+	<p>When the program is done running, you'll be taken to the admin area to verify that everything went smoothly.  In the event that things didn't go smoothly, don't panic!  It just means I screwed up.</p>
 	<form action="." method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		{% csrf_token %}
 		<table>
 			{{form.as_table}}
 		</table>
-		<input type="submit" class="submit" value="Populate the database with lots of profile images for companies!  Please ignore how ridiculously long this submit button is." />
+		<input type="submit" class="submit" value="Populate the database!" />
 	</form>
 </div>
 
