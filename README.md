@@ -21,6 +21,6 @@ To add image_grab app to a project:
 
         python manage.py syncdb
 
-+ optionally, to create a link to the upload merchant file page, in the admin template base_site.html, right before the last \</div>, add: 
++ optionally, to create a link to the upload merchant file page, in the admin template index.html, right before the last \</div>, add: 
        
         <a href="/image_grab">Grab Images for Vendors</a>
