@@ -5,15 +5,17 @@ Given a list of vendors, grab profile images for each from social networks (curr
 
 Image Retrieval is a blank project to make sure image_grab app is working.
 To add image_grab app to a project:
-+ to urls.py patterns, add: 
++ move image_grab folder to your project folder
+
++ to your project's urls.py patterns, add: 
     
         url(r'^image_grab/', include('image_grab.urls')),
 
-+ to INSTALLED_APPS in settings.py, add: 
++ to INSTALLED_APPS in your project's settings.py, add: 
 
         'image_grab',
 
-+ to TEMPLATE_DIRS in settings.py, add: 
++ to TEMPLATE_DIRS in your project's settings.py, add: 
 
         os.path.join(PROJECT_ROOT, 'image_grab', 'templates'),
 
